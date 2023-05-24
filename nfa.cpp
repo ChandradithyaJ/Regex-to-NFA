@@ -92,7 +92,7 @@ class NFA{
                 if(eclose.find(state) == eclose.end()) temp2.insert(eclose.begin(), eclose.end());
                 set<int>::iterator itr = temp2.begin();
                 for(; itr != temp2.end(); itr++){
-                    frontier.insert(transitionFunction[make_pair(*itr, 'E')].begin(), transitionFunction[make_pair(*itr, 'E')].end());
+                    frontier.insert(transitionFunction[make_pair(*itr, w)].begin(), transitionFunction[make_pair(*itr, w)].end());
                 }
             }
             return frontier;
@@ -211,6 +211,7 @@ class NFA{
                 set<int> tempo = findEpsilonClosure(*it);
                 finalStates.insert(tempo.begin(), tempo.end());
             }
+
             int i = 1;
             while(!finalStates.empty() && i < w.size()){
                 set<int> tempFinal;
@@ -220,7 +221,6 @@ class NFA{
                     tempFinal.insert(temp.begin(), temp.end());
                     itr++;
                 }
-
                 finalStates = tempFinal;
                 i++;
             }
@@ -231,7 +231,7 @@ class NFA{
                 set<int> temps = findEpsilonClosure(*finalCheck);
                 temporary.insert(temps.begin(), temps.end());
             }
-            temporary.swap(finalStates);
+            finalStates.insert(temporary.begin(), temporary.end());
             finalCheck = finalStates.begin();
             for(; finalCheck != finalStates.end(); finalCheck++){
                 if(acceptingStates.find(*finalCheck) != acceptingStates.end()) return true;
@@ -301,7 +301,7 @@ class NFA{
 int main(){
     NFA N;
     //N.buildNFA("aaab+ba(ab)*");
-    N.buildNFA("(a+(ab)*)*");
+    N.buildNFA("(bb+bb)*+bba+ba(ab)*");
     N.printTransitionFunction();
     cout << "Accepting State(s): ";
     N.printSetOfStates(N.acceptingStates);
