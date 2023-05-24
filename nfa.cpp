@@ -54,7 +54,7 @@ class NFA{
                 }
                 else if(RE[i] == '('){
                     int _subInitialState = currentState;
-                    i = generateNFA(_subInitialState, RE, i);
+                    i = generateNFA(_subInitialState, RE, i+1);
                 }
                 else if(RE[i] == ' ') continue;
                 else{ // RE[i] = ')'
@@ -281,7 +281,7 @@ class NFA{
 int main(){
     NFA N;
     //N.buildNFA("aaab+ba(ab)*");
-    N.buildNFA("(bb+bb)*+bba+ba(ab)*");
+    N.buildNFA("(a+(b+a))*");
     N.printTransitionFunction();
     cout << "Accepting State(s): ";
     N.printSetOfStates(N.acceptingStates);
