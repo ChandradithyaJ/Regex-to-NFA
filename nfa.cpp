@@ -300,7 +300,6 @@ class NFA{
 
 int main(){
     NFA N;
-    //N.buildNFA("aaab+ba(ab)*");
     N.buildNFA("(bb+bb)*+bba+ba(ab)*");
     N.printTransitionFunction();
     cout << "Accepting State(s): ";
