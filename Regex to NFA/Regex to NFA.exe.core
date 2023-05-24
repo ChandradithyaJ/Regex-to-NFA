@@ -1,0 +1,23 @@
+[main] Regex to NFA 1000 (0) exception: trapped!
+[main] Regex to NFA 1000 (0) exception: code 0xC0000005 at 0x416FC8
+[main] Regex to NFA 1000 (0) exception: ax 0x24AFBE8 bx 0xA1E2350 cx 0x10 dx 0x24AFBE8
+[main] Regex to NFA 1000 (0) exception: si 0x24AFBE0 di 0xA1E1C68 bp 0x24AFAAC sp 0x24AFA98
+[main] Regex to NFA 1000 (0) exception: exception is: STATUS_ACCESS_VIOLATION
+[main] Regex to NFA 1000 (0) stack: Stack trace:
+[main] Regex to NFA 1000 (0) stack: frame 0: sp = 0x24AEE50, pc = 0x6100A2C3
+[main] Regex to NFA 1000 (0) stack: frame 1: sp = 0x24AEE8C, pc = 0x77D08502
+[main] Regex to NFA 1000 (0) stack: frame 2: sp = 0x24AEEB0, pc = 0x77D084D4
+[main] Regex to NFA 1000 (0) stack: frame 3: sp = 0x24AEF78, pc = 0x77CE8756
+[main] Regex to NFA 1000 (0) stack: frame 4: sp = 0x24AFAAC, pc = 0x41D099
+[main] Regex to NFA 1000 (0) stack: frame 5: sp = 0x24AFB1C, pc = 0x41CE4D
+[main] Regex to NFA 1000 (0) stack: frame 6: sp = 0x24AFB48, pc = 0x41CB7B
+[main] Regex to NFA 1000 (0) stack: frame 7: sp = 0x24AFB60, pc = 0x41B7A2
+[main] Regex to NFA 1000 (0) stack: frame 8: sp = 0x24AFBF0, pc = 0x41DA23
+[main] Regex to NFA 1000 (0) stack: frame 9: sp = 0x24AFD00, pc = 0x4010E9
+[main] Regex to NFA 1000 (0) stack: frame 10: sp = 0x24AFD7C, pc = 0x61004402
+[main] Regex to NFA 1000 (0) stack: frame 11: sp = 0x24AFF3C, pc = 0x61004420
+[main] Regex to NFA 1000 (0) stack: frame 12: sp = 0x24AFF48, pc = 0x41601A
+[main] Regex to NFA 1000 (0) stack: frame 13: sp = 0x24AFF58, pc = 0x40103A
+[main] Regex to NFA 1000 (0) stack: frame 14: sp = 0x24AFF74, pc = 0x76847D69
+[main] Regex to NFA 1000 (0) stack: frame 15: sp = 0x24AFF84, pc = 0x77CDB74B
+[main] Regex to NFA 1000 (0) stack: End of stack trace (more stack frames may be present)

@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1684934123 source:d:\jcs c++ projects\data structures and algorithms lab\apr 11 2k23\regex to nfa\nfa.cpp
+	<iostream>
+	<set>
+	<map>
+	<utility>
+	<string>
+	<iterator>
+	<queue>
+
