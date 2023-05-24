@@ -87,14 +87,34 @@ class NFA{
             }
 
             if(transitionFunction.find(make_pair(state, 'E')) != transitionFunction.end()){
-                set<int>::iterator itr = transitionFunction[make_pair(state, 'E')].begin();
-                while(itr!=transitionFunction[make_pair(state, 'E')].end()){
+                //set<int>::iterator itr = transitionFunction[make_pair(state, 'E')].begin();
+                set<int> eclose = findEpsilonClosure(state);
+                if(eclose.find(state) == eclose.end()){
+                    frontier.insert(eclose.begin(), eclose.end());
+                }
+
+                /*while(itr!=transitionFunction[make_pair(state, 'E')].end()){
                     set<int> temp = isValidUtility(w,*itr);
                     frontier.insert(temp.begin(), temp.end());
                     itr++;
-                }
+                }*/
             }
+            cout << "cdvf";
+            printSetOfStates(frontier);
             return frontier;
+        }
+
+        set<int> findEpsilonClosure(int state){
+            set<int> eclose;
+            set<int>::iterator itr;
+            if(transitionFunction.find(make_pair(state, 'E')) != transitionFunction.end())
+                eclose.insert(transitionFunction[make_pair(state, 'E')].begin(), transitionFunction[make_pair(state, 'E')].end());
+            for(itr = eclose.begin(); itr != eclose.end(); itr++){
+                if(transitionFunction.find(make_pair(*itr, 'E')) != transitionFunction.end())
+                eclose.insert(transitionFunction[make_pair(*itr, 'E')].begin(), transitionFunction[make_pair(*itr, 'E')].end());
+            }
+            printSetOfStates(eclose);
+            return eclose;
         }
 
         set<int> epsilonTransitionsOnState(int states){
@@ -281,7 +301,7 @@ class NFA{
 int main(){
     NFA N;
     //N.buildNFA("aaab+ba(ab)*");
-    N.buildNFA("(a+(b+a))*");
+    N.buildNFA("(a+(ab)*)*");
     N.printTransitionFunction();
     cout << "Accepting State(s): ";
     N.printSetOfStates(N.acceptingStates);
