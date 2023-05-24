@@ -178,10 +178,8 @@ class NFA{
                     int subInitialState = currentState;
 
                     i = generateNFA(subInitialState, RE, i+1);
-                    if((i < RE.size()-1 && RE[i+1] == '+') || (i == RE.size()-1)){
+                    if((RE[i] == '*' && i == RE.size()-1) || (RE[i] == '*' && i < RE.size()-1 && characters.find(RE[i+1]) == characters.end()))
                         acceptingStates.insert(currentState);
-                        currentState = initialState;
-                    }
                     closeState = 0;
                 }
             }
