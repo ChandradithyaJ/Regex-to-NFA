@@ -14,12 +14,23 @@ class NFA{
 
         // Building Alphabets
         void buildAlphabet(string RE){
+            RE = compactRegexGeneration(RE);
             for(int i = 0; i < RE.size(); i++){
                 if(RE[i] != '+' && RE[i] != '*' && RE[i] != '(' && RE[i] != ')' && RE[i] != ' ') characters.insert(RE[i]);
                 characters.insert('E');
             }
         }
 
+        // Compact form of REGEX
+        string compactRegexGeneration(string Regex){
+        	string compact="";
+	        for(int i=0;i<Regex.size();i++){
+		        if(Regex[i] == ' ') continue;
+    		    compact+=Regex[i];
+	        }
+	        return compact;
+        }
+    
         int generateNFA(int subInitialState, string RE, int i){
             int closeState = 0;
             for(;i < RE.size(); i++){
