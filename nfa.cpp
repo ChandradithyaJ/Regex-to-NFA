@@ -14,23 +14,12 @@ class NFA{
 
         // Building Alphabets
         void buildAlphabet(string RE){
-            RE = compactRegexGeneration(RE);
             for(int i = 0; i < RE.size(); i++){
                 if(RE[i] != '+' && RE[i] != '*' && RE[i] != '(' && RE[i] != ')' && RE[i] != ' ') characters.insert(RE[i]);
                 characters.insert('E');
             }
         }
 
-        // Compact form of REGEX
-        string compactRegexGeneration(string Regex){
-        	string compact="";
-	        for(int i=0;i<Regex.size();i++){
-		        if(Regex[i] == ' ') continue;
-    		    compact+=Regex[i];
-	        }
-	        return compact;
-        }
-    
         int generateNFA(int subInitialState, string RE, int i){
             int closeState = 0;
             for(;i < RE.size(); i++){
@@ -98,20 +87,14 @@ class NFA{
             }
 
             if(transitionFunction.find(make_pair(state, 'E')) != transitionFunction.end()){
-                //set<int>::iterator itr = transitionFunction[make_pair(state, 'E')].begin();
                 set<int> eclose = findEpsilonClosure(state);
-                if(eclose.find(state) == eclose.end()){
-                    frontier.insert(eclose.begin(), eclose.end());
+                set<int> temp2;
+                if(eclose.find(state) == eclose.end()) temp2.insert(eclose.begin(), eclose.end());
+                set<int>::iterator itr = temp2.begin();
+                for(; itr != temp2.end(); itr++){
+                    frontier.insert(transitionFunction[make_pair(*itr, 'E')].begin(), transitionFunction[make_pair(*itr, 'E')].end());
                 }
-
-                /*while(itr!=transitionFunction[make_pair(state, 'E')].end()){
-                    set<int> temp = isValidUtility(w,*itr);
-                    frontier.insert(temp.begin(), temp.end());
-                    itr++;
-                }*/
             }
-            cout << "cdvf";
-            printSetOfStates(frontier);
             return frontier;
         }
 
@@ -124,7 +107,6 @@ class NFA{
                 if(transitionFunction.find(make_pair(*itr, 'E')) != transitionFunction.end())
                 eclose.insert(transitionFunction[make_pair(*itr, 'E')].begin(), transitionFunction[make_pair(*itr, 'E')].end());
             }
-            printSetOfStates(eclose);
             return eclose;
         }
 
@@ -223,6 +205,12 @@ class NFA{
             }
 
             set<int> finalStates = isValidUtility(w[0], 0);
+            set<int> fs = finalStates;
+            set<int>::iterator it = fs.begin();
+            for(; it != fs.end(); it++){
+                set<int> tempo = findEpsilonClosure(*it);
+                finalStates.insert(tempo.begin(), tempo.end());
+            }
             int i = 1;
             while(!finalStates.empty() && i < w.size()){
                 set<int> tempFinal;
@@ -232,14 +220,15 @@ class NFA{
                     tempFinal.insert(temp.begin(), temp.end());
                     itr++;
                 }
-                finalStates.swap(tempFinal);
+
+                finalStates = tempFinal;
                 i++;
             }
 
             set<int> temporary;
             set<int>::iterator finalCheck = finalStates.begin();
             for(;finalCheck != finalStates.end(); finalCheck++){
-                set<int> temps = epsilonTransitionsOnState(*finalCheck);
+                set<int> temps = findEpsilonClosure(*finalCheck);
                 temporary.insert(temps.begin(), temps.end());
             }
             temporary.swap(finalStates);
