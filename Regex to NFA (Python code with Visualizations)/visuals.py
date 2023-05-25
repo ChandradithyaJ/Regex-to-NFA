@@ -30,7 +30,6 @@ def create_digraph(regex):
             edges.append((state, frontier_state))
 
     edge_labels = {}
-    edge_labels[("start", 0)] = 'E'
     for (state, ch) in map_edges:
         for frontier_state in map_edges[(state, ch)]:
             edge_labels[(state, frontier_state)] = ch
