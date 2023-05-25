@@ -38,11 +38,11 @@ def create_digraph(regex):
     # build the digraph
     G.add_nodes_from(nodes)
     G.add_edges_from(edges)
-    pos = nx.spectral_layout(G)
+    pos = nx.random_layout(G)
     node_color = []
     for node in nodes:
-        if node == -1:
-            node_color.append("lightgray")
+        if node == "start":
+            node_color.append("white")
         elif node in N.accepting_states:
             node_color.append("mistyrose")
         else:
@@ -50,5 +50,5 @@ def create_digraph(regex):
 
 
     plt.figure(figsize=(10, 9))
-    nx.draw_networkx(G, pos, arrows=True, node_color=node_color)
+    nx.draw_networkx(G, pos, arrows=True, node_color=node_color, width=0.5)
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='red')
