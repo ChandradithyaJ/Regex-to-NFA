@@ -38,7 +38,7 @@ def create_digraph(regex):
     # build the digraph
     G.add_nodes_from(nodes)
     G.add_edges_from(edges)
-    pos = nx.random_layout(G)
+    pos = nx.spectral_layout(G)
     node_color = []
     for node in nodes:
         if node == -1:
