@@ -30,7 +30,7 @@ class NFA{
                         setOfStates.insert(currentState);
                     }
                     else{
-                        transitionFunction[make_pair(currentState,RE[i])].insert(stateNum);
+                        transitionFunction[make_pair(currentState,RE[i])].insert(currentState);
                         i++;
                     }
                 }
@@ -152,7 +152,7 @@ class NFA{
                         setOfStates.insert(currentState);
                     }
                     else{
-                        transitionFunction[make_pair(currentState,RE[i])].insert(stateNum);
+                        transitionFunction[make_pair(currentState,RE[i])].insert(currentState);
                         i++;
                     }
                 }
@@ -300,7 +300,7 @@ class NFA{
 
 int main(){
     NFA N;
-    N.buildNFA("(bb+bb)*+bba+ba(ab)*");
+    N.buildNFA("sav*+(b*+c*)(bb+a)*");
     N.printTransitionFunction();
     cout << "Accepting State(s): ";
     N.printSetOfStates(N.acceptingStates);
